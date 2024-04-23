@@ -45,8 +45,9 @@ public class AccountController {
     @PutMapping(path = "{accountId}")
     public void updateAccount(@PathVariable("accountId") Long accountId,
                               @RequestParam(required = false) String name,
-                              @RequestParam(required = false) int phoneno,
-                              @RequestParam(required = false) int balance) {
-        accountService.updateAccount(accountId, name, phoneno, balance);
+                              @RequestParam(required = false) Integer phoneno,
+                              @RequestParam(required = false) Double balance,
+                              @RequestParam(required = false) String accountType) {
+        accountService.updateAccount(accountId, name, phoneno, balance, accountType);
     }
 }

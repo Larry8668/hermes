@@ -17,26 +17,29 @@ public class Account {
     private Long id;
     private Long accountId;
     private String name;
-    private int phoneno;
-    private int balance;
+    private Integer phoneno;
+    private Double balance;
+    private String accountType;
 
     public Account() {
 
     }
 
-    public Account(Long id, Long accountId, String name, int phoneno, int balance) {
+    public Account(Long id, Long accountId, String name, int phoneno, Double balance, String accountType) {
         this.id = id;
         this.accountId = accountId;
         this.name = name;
         this.phoneno = phoneno;
         this.balance = balance;
+        this.accountType = accountType;
     }
 
-    public Account(Long accountId, String name, int phoneno, int balance) {
+    public Account(Long accountId, String name, int phoneno, Double balance, String accountType) {
         this.accountId = accountId;
         this.name = name;
         this.phoneno = phoneno;
         this.balance = balance;
+        this.accountType = accountType;
     }
 
     public Long getId() {
@@ -51,12 +54,16 @@ public class Account {
         return name;
     }
 
-    public int getPhoneno() {
+    public Integer getPhoneno() {
         return phoneno;
     }
 
-    public int getBalance() {
+    public Double getBalance() {
         return balance;
+    }
+
+    public String getAccountType() {
+        return accountType;
     }
 
     public void setId(Long id) {
@@ -71,12 +78,17 @@ public class Account {
         this.name = name;
     }
 
-    public void setPhoneno(int phoneno) {
+    public void setPhoneno(Integer phoneno) {
         this.phoneno = phoneno;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(Double balance) {
         this.balance = balance;
+
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 
     @Override

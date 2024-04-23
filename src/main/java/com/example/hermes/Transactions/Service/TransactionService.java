@@ -28,24 +28,30 @@ public class TransactionService {
         return transactionRepository.findAll();
     }
 
-    public void makeTransaction(Long fromAccountId, Long toAccountId, int amount) {
+    public void makeTransaction(Long fromAccountId, Long toAccountId, Double amount) {
         Optional<Account> optionalFromAccount = accountService.getAccountById(fromAccountId);
         Optional<Account> optionalToAccount = accountService.getAccountById(toAccountId);
-
-        Account fromAccount = optionalFromAccount
-                .orElseThrow(() -> new IllegalArgumentException("Invalid 'from' account."));
+    
+        Account fromAccount = optionalFromAccount.orElseThrow(() -> new IllegalArgumentException("Invalid 'from' account."));
         Account toAccount = optionalToAccount.orElseThrow(() -> new IllegalArgumentException("Invalid 'to' account."));
-
+    
         if (fromAccount.getBalance() < amount) {
             throw new IllegalArgumentException("Insufficient balance in the from account.");
         }
-
+    
         fromAccount.setBalance(fromAccount.getBalance() - amount);
         toAccount.setBalance(toAccount.getBalance() + amount);
-
+    
         accountService.updateAccountForTransaction(fromAccount);
         accountService.updateAccountForTransaction(toAccount);
-
+    
+        if (toAccount.getAccountType().equals("merchant")) {
+            Double cashbackPercentage = 0.05;
+            Double cashbackAmount = amount * cashbackPercentage;
+            fromAccount.setBalance(fromAccount.getBalance() + cashbackAmount);
+            accountService.updateAccountForTransaction(fromAccount);
+        }
+    
         Transaction transaction = new Transaction(fromAccountId, toAccountId, amount);
         transactionRepository.save(transaction);
     }

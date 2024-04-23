@@ -23,7 +23,7 @@ public class TransactionController {
     @PostMapping("/make")
     public void makeTransaction(@RequestParam Long fromAccountId,
                                 @RequestParam Long toAccountId,
-                                @RequestParam int amount) {
+                                @RequestParam Double amount) {
         transactionService.makeTransaction(fromAccountId, toAccountId, amount);
     }
 }

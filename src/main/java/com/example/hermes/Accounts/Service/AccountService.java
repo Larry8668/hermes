@@ -47,17 +47,20 @@ public class AccountService {
     }
 
     @Transactional
-    public void updateAccount(Long accountId, String name, int phoneno, int balance) {
+    public void updateAccount(Long accountId, String name, Integer phoneno, Double balance, String accountType) {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new IllegalStateException("Account with Id : " + accountId + " doesn't exist"));
         if (name != null && name.length() > 0 && !Objects.equals(account.getName(), name)) {
             account.setName(name);
         }
-        if (phoneno != account.getPhoneno()) {
+        if (phoneno!=null && phoneno != account.getPhoneno()) {
             account.setPhoneno(phoneno);
         }
-        if (balance != account.getBalance()) {
+        if (balance!=null && balance != account.getBalance()) {
             account.setBalance(balance);
+        }
+        if(accountType!=null && accountType.length()>0 && accountType != account.getAccountType()){
+            account.setAccountType(accountType);
         }
     }
 
