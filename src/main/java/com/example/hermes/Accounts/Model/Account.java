@@ -20,26 +20,29 @@ public class Account {
     private Integer phoneno;
     private Double balance;
     private String accountType;
+    private String password;
 
     public Account() {
 
     }
 
-    public Account(Long id, Long accountId, String name, int phoneno, Double balance, String accountType) {
+    public Account(Long id, Long accountId, String name, int phoneno, Double balance, String accountType, String password) {
         this.id = id;
         this.accountId = accountId;
         this.name = name;
         this.phoneno = phoneno;
         this.balance = balance;
         this.accountType = accountType;
+        this.password = password;
     }
 
-    public Account(Long accountId, String name, int phoneno, Double balance, String accountType) {
+    public Account(Long accountId, String name, int phoneno, Double balance, String accountType, String password) {
         this.accountId = accountId;
         this.name = name;
         this.phoneno = phoneno;
         this.balance = balance;
         this.accountType = accountType;
+        this.password = password;
     }
 
     public Long getId() {
@@ -66,6 +69,10 @@ public class Account {
         return accountType;
     }
 
+    public String getPassword(){
+        return password;
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
@@ -89,6 +96,9 @@ public class Account {
 
     public void setAccountType(String accountType) {
         this.accountType = accountType;
+    }
+    public void setPassword(String password){
+        this.password = password;
     }
 
     @Override

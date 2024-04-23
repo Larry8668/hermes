@@ -11,4 +11,6 @@ public interface AccountRepository extends JpaRepository<Account, Long> {
 
     @Query("select a from Account a where a.accountId = ?1")
     Optional<Account> findAccountByAccountId(Long accountId);
+
+    Optional<Account> findByAccountIdAndPassword(Long accountId, String password);
 }
