@@ -1,5 +1,7 @@
 package com.example.hermes.Stock;
 
+
+
 import com.example.hermes.Stock.*;
 import com.example.hermes.Stock.StockFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.http.MediaType;
 
 import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/stocks")
@@ -20,15 +23,15 @@ public class StockController {
     private StockFactory stockFactory;
 
     @GetMapping
-    public ModelAndView index() {
+    public ModelAndView index(){
         return new ModelAndView("stockindex.html");
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public Stock createStock(@RequestParam String symbol, @RequestParam String name, @RequestParam double price) {
-        Stock newStock = stockFactory.createStock(symbol, name, price);
-        return stockRepository.save(newStock);
-    }
+public Stock createStock(@RequestParam String symbol, @RequestParam String name, @RequestParam double price) {
+    Stock newStock = stockFactory.createStock(symbol, name, price);
+    return stockRepository.save(newStock);
+}
 
     @GetMapping("/all")
     public List<Stock> getAllStocks() {
