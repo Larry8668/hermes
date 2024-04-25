@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Stock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .container h2 {
+            color: #ff69b4;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .input-group input[type="text"],
+        .input-group input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            color: black;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Create Stock</h2>
+    <form action="/api/stocks" method="post" th:object="${stock}" class="create-stock-form">
+        <div class="input-group">
+            <label for="symbol">Symbol</label>
+            <input type="text" id="symbol" name="symbol" required />
+        </div>
+        <div class="input-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required />
+        </div>
+        <div class="input-group">
+            <label for="price">Price</label>
+            <input type="number" id="price" name="price" step="0.01" required />
+        </div>
+        <button type="submit" class="bg-blue-700 p-3 rounded-xl hover:bg-blue-400 transition ease-in duration-100">Create Stock</button>
+        <p class="error-message" id="error-message" th:text="${errorMessage}"></p>
+    </form>
+</div>
+</body>
+</html>
