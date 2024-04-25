@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
 import com.example.hermes.Accounts.Service.AccountService;
 import com.example.hermes.Authentication.Login.Service.LoginService;
 
-@RestController
+// @RestController
+@Controller
 @RequestMapping(path = "/login")
 public class LoginController {
     @Autowired
@@ -31,19 +34,17 @@ public class LoginController {
 
     @GetMapping
     public ModelAndView loginPage(Model model) {
-        // return "login.html";
         return new ModelAndView("login.html");
     }
 
     @PostMapping
-    public void checkValidUserLogin(@RequestParam Long accountId, @RequestParam String password, RedirectAttributes redirectAttributes) {
+    public String checkValidUserLogin(@RequestParam Long accountId, @RequestParam String password, RedirectAttributes redirectAttributes) {
         boolean validUser = loginService.checkUserExists(accountId, password);
-        System.out.println(validUser);
-        redirectAttributes.addFlashAttribute("message", "Form submitted successfully!");
+        redirectAttributes.addFlashAttribute("message", "Username or Password is Incorrect, Try again!");
 
         if(validUser){
-            System.out.println("Valid User");
-            
+            return "redirect:/home"; 
         }
+        return "redirect:/login";
     }
 }
