@@ -1,90 +1,45 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-      }
-
-      .container {
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-        background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
-
-      h1 {
-        color: #ff69b4;
-      }
-
-      p {
-        font-size: 18px;
-        margin-bottom: 20px;
-      }
-
-      .transaction-form {
-        margin-bottom: 20px;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-
-      .transaction-form label {
-        flex: 0 0 30%;
-        margin-bottom: 10px;
-      }
-
-      .transaction-form input[type="text"] {
-        flex: 0 0 calc(70% - 10px);
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-      }
-
-      .transaction-form button {
-        flex: 0 0 100%;
-        margin-top: 10px;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        background-color: #ff69b4;
-        color: #fff;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-
-      .transaction-form button:hover {
-        background-color: #d43f76;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Home Page</h1>
-      <p th:text="'Welcome, ' + ${currUser?.name ?: 'Guest'}"></p>
-      <p th:text="'Current Balance: ' + ${currUser?.balance ?: 0}"></p>
-      <p th:text="'Phone Number: ' + ${currUser?.phoneno ?: 'N/A'}"></p>
-      <p th:text="'Account Type: ' + ${currUser?.accountType ?: 'N/A'}"></p>
-
-      <hr />
-
-      <form class="transaction-form" action="/transaction/make" method="post">
-        <input type="hidden" id="fromAccountId" name="fromAccountId" th:value="${currUser?.accountId}" />
-        <label for="toAccountId">To Account ID:</label>
-        <input type="text" id="toAccountId" name="toAccountId" required />
-        <label for="amount">Amount:</label>
-        <input type="text" id="amount" name="amount" required />
-        <button type="submit">Make Transaction</button>
-      </form>
-      <hr />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-black">
+<div class="flex flex-col items-center justify-center gap-9">
+    <div class="flex flex-col items-center justify-center max-w-[1000px]">
+        <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-white md:text-5xl lg:text-6xl">
+            Welcome to <span class="text-blue-700">Hermes</span>!
+        </h1>
+        <p class="mb-6 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400 text-center">
+            An End-to-End Payment Gateway application developed using Spring Boot, leveraging OOAD principles with support for payments, stock investments, and much more.
+        </p>
     </div>
-  </body>
+
+    <div class="container text-white  p-4 rounded-lg shadow-md text-center max-w-[800px] mx-auto bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100">
+        <h1 class="text-blue-700">Home Page</h1>
+        <p th:text="'Welcome, ' + ${currUser?.name ?: 'Guest'}"></p>
+        <p th:text="'Current Balance: ' + ${currUser?.balance ?: 0}"></p>
+        <p th:text="'Phone Number: ' + ${currUser?.phoneno ?: 'N/A'}"></p>
+        <p th:text="'Account Type: ' + ${currUser?.accountType ?: 'N/A'}"></p>
+
+        <hr class="my-4" />
+
+        <form class="transaction-form text-black" action="/transaction/make" method="post">
+            <input type="hidden" id="fromAccountId" name="fromAccountId" th:value="${currUser?.accountId}" />
+            <div class="flex flex-wrap justify-between items-center mb-4">
+                <label for="toAccountId" class="w-full md:w-1/3 text-white">To Account ID:</label>
+                <input type="text" id="toAccountId" name="toAccountId" required class="w-full md:w-2/3 p-2 border border-gray-300 text-black rounded-md" />
+            </div>
+            <div class="flex flex-wrap justify-between items-center mb-4">
+                <label for="amount" class="w-full md:w-1/3 text-white">Amount:</label>
+                <input type="text" id="amount" name="amount" required class="w-full md:w-2/3 p-2 border border-gray-300 rounded-md" />
+            </div>
+            <button type="submit" class="w-full p-3 bg-blue-700 text-white rounded-md hover:bg-blue-500 transition ease-in duration-100">Make Transaction</button>
+        </form>
+        <hr class="my-4" />
+    </div>
+</div>
+</body>
 </html>
