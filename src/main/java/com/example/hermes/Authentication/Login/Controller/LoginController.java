@@ -13,9 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.example.hermes.Accounts.Model.Account;
 import com.example.hermes.Accounts.Service.AccountService;
 import com.example.hermes.Authentication.Login.Service.LoginService;
 
@@ -42,6 +45,9 @@ public class LoginController {
         redirectAttributes.addFlashAttribute("message", "Username or Password is Incorrect, Try again!");
 
         if(validUser){
+            Optional<Account> currUser = loginService.getAccountById(accountId);
+            redirectAttributes.addFlashAttribute("currUser", currUser.get());
+            System.out.println(currUser);
             return "redirect:/home"; 
         }
         return "redirect:/login";
