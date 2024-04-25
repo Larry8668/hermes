@@ -1,16 +1,11 @@
 package com.example.hermes.Authentication.Login.Controller;
 
-
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
+import com.example.hermes.Accounts.Service.AccountService;
+import com.example.hermes.Authentication.Login.Service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,6 +20,7 @@ import com.example.hermes.Authentication.Login.Service.LoginService;
 @Controller
 @RequestMapping(path = "/login")
 public class LoginController {
+
     @Autowired
     private final LoginService loginService;
 

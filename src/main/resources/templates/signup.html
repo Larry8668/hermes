@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <title>Login</title>
+    <title>Sign Up</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -67,22 +67,30 @@
         </p>
     </div>
 
-    <form action="/login" method="post" class="login-form text-white w-[300px]">
-        <h2>Login</h2>
+    <form action="/sign-up" method="post" class="login-form text-white w-[300px]">
+        <h2>Sign Up</h2>
         <div class="input-group">
-            <label for="accountId">Account ID</label>
-            <input type="text" id="accountId" name="accountId" required />
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required />
         </div>
         <div class="input-group">
             <label for="password">Password</label>
             <input type="password" id="password" name="password" required />
         </div>
-        <button type="submit" class="bg-blue-700 p-3 rounded-xl hover:bg-blue-400 transition ease-in duration-100">Login</button>
+        <div class="input-group">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" required />
+        </div>
+        <div class="input-group">
+            <label for="accountType">Account Type</label>
+            <input type="text" id="accountType" name="accountType" required />
+        </div>
+        <button type="submit" class="bg-blue-700 p-3 rounded-xl hover:bg-blue-400 transition ease-in duration-100">Sign Up</button>
         <p class="error-message" id="error-message" th:text="${errorMessage}"></p>
     </form>
 
     <div class="text-white mt-4">
-        <p>Don't have an account? <a href="/sign-up" class="text-blue-700">Sign Up</a></p>
+        <p>Already have an account? <a href="/login" class="text-blue-700">Log in</a></p>
     </div>
 </div>
 </body>
