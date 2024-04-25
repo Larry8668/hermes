@@ -22,13 +22,19 @@
             text-align: center;
         }
 
-        h1 {
-            color: #ff69b4;
+        .user-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
-        p {
+        .user-info p {
             font-size: 18px;
-            margin-bottom: 20px;
+        }
+
+        .arrow {
+            font-size: 24px;
         }
 
         .success {
@@ -38,12 +44,33 @@
         .failure {
             color: red;
         }
+
+        .button {
+            margin-top: 20px;
+            background-color: #ff69b4;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #d43f76;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Payment Status</h1>
+        <div class="user-info">
+            <p th:text="${currUser.name}"></p>
+            <span class="arrow">➜</span>
+            <p th:text="${receiverUser.name}"></p>
+        </div>
         <p th:text="${transactionSuccess ? 'Payment Successful' : 'Payment Failed'}" class="${transactionSuccess ? 'success' : 'failure'}"></p>
+        <a th:href="@{/login}" class="button">Go to Login</a>
     </div>
 </body>
 </html>
