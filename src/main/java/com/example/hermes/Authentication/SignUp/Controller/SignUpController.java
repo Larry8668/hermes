@@ -1,6 +1,9 @@
 package com.example.hermes.Authentication.SignUp.Controller;
 
+import com.example.hermes.Accounts.Model.Account;
 import com.example.hermes.Authentication.SignUp.Service.SignUpService;
+
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -41,13 +44,20 @@ public class SignUpController {
             @RequestParam String accountType,
             RedirectAttributes redirectAttributes) {
         Boolean status = signUpService.addAccount(name, password, phoneNumber, accountType);
-        if (status) {
+        if (status && accountType.toLowerCase().equals("admin")) {
             System.out.println("Account Created Successfully!");
-            return new ModelAndView("index.html");
+            redirectAttributes.addFlashAttribute("message", "Account created successfully!");
+            return new ModelAndView("redirect:/");
+        } else if (status) {
+            redirectAttributes.addFlashAttribute("message", "Account created successfully!");
+            Optional<Account> loggedInUser = signUpService.getLoggedInUser(name);
+            redirectAttributes.addFlashAttribute("currUser", loggedInUser.get());
+            System.out.println(loggedInUser);
+            return new ModelAndView("redirect:/home");
         } else {
-            return new ModelAndView("error.html");
+            redirectAttributes.addFlashAttribute("error", "Error creating account. Please try again.");
+            return new ModelAndView("redirect:/error");
         }
-
     }
 
 }

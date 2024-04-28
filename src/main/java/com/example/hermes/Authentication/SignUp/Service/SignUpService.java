@@ -21,6 +21,10 @@ public class SignUpService {
     public SignUpService(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
     }
+    
+    public Optional<Account> getLoggedInUser(String username) {
+        return accountRepository.findByName(username);
+    }
 
     @Transactional
     public boolean addAccount(String name, String password, int phoneNumber, String accountType) {
@@ -46,7 +50,7 @@ public class SignUpService {
         if(randomValue < 0) randomValue *= -1;
 
         // Create a new Account object with the provided details
-        Account newAccount = new Account(newAccountId, randomValue, name, phoneNumber, 0.0, accountType, password);
+        Account newAccount = new Account(newAccountId, randomValue, name, phoneNumber, 500.0, accountType, password);
         accountRepository.save(newAccount);
 
         System.out.println("Account created successfully.");

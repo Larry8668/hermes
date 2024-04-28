@@ -103,7 +103,7 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Movie{" +
+        return "Account{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", phoneno=" + phoneno +
