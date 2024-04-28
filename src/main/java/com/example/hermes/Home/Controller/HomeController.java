@@ -14,7 +14,6 @@ import com.example.hermes.Transactions.Service.TransactionService;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller

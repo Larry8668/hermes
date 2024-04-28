@@ -24,7 +24,12 @@
             <p th:text="${receiverUser.name}"></p>
         </div>
         <p th:text="${transactionSuccess ? 'Payment Successful' : 'Payment Failed'}" class="${transactionSuccess ? 'text-green-500' : 'text-red-500'}"></p>
-        <a th:href="@{/login}" class="mt-4 bg-blue-700 text-white p-3 rounded-md hover:bg-blue-500 transition ease-in duration-100">Go to Login</a>
+        <br />
+        <hr />
+        <br />
+        <br />
+        <br />
+        <a th:href="@{/login}" class="mt-4 bg-blue-700 text-white p-3 rounded-md hover:bg-blue-500 transition ease-in duration-100">Go to Home</a>
     </div>
 </div>
 </body>

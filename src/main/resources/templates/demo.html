@@ -1,0 +1,32 @@
+<!-- Thymeleaf template -->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Boot with Thymeleaf and localStorage</title>
+    <!-- Include jQuery for AJAX -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <div th:text="${dataFromServer}"></div>
+    
+    <!-- Script to handle localStorage -->
+    <script th:inline="javascript">
+        // Retrieve data from localStorage
+        var data = localStorage.getItem('key');
+        if (data) {
+            $('div').text(data);
+        }
+        
+        // Function to update data and localStorage
+        function updateData() {
+            var newData = 'new value';
+                localStorage.setItem('key', newData);
+                $('div').text(newData);
+        }
+    </script>
+
+    <!-- Button to update data -->
+    <button onclick="updateData()">Update Data</button>
+</body>
+</html>

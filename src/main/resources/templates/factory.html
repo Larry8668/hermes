@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stock Factory</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #1f2937;
+            color: #d1d5db;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #60a5fa;
+        }
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 2rem;
+            background-color: rgba(209, 213, 219, 0.2);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: #374151;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #2563eb;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #1e40af;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex flex-col items-center justify-center h-screen">
+        <div class="text-center">
+            <h1 class="mb-4">Add a Stock</h1>
+        </div>
+        <form action="#" th:action="@{/addStock}" method="post" class="bg-white rounded-lg shadow-md p-8 max-w-md">
+            <input type="text" name="name" placeholder="Stock Name" required><br><br>
+            <select name="type" id="stockType" onchange="togglePriceInput()" class="mb-4">
+                <option value="tech">Tech</option>
+                <option value="fin">Finance</option>
+                <option value="pharma">Pharma</option>
+                <option value="custom">Custom</option>
+            </select><br>
+            <input type="number" name="price" id="priceInput" placeholder="Stock Price" value="100.0" style="display: none;"><br>
+            <button type="submit" class="mt-4">Add Stock</button>
+        </form>
+    </div>
+
+    <script>
+        function togglePriceInput() {
+            var stockType = document.getElementById("stockType").value;
+            var priceInput = document.getElementById("priceInput");
+            if (stockType === "custom") {
+                priceInput.style.display = "block";
+            } else {
+                priceInput.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
