@@ -23,10 +23,9 @@ public class LoginService {
     }
 
     public boolean checkUserExists(Long accountId, String password){
-        Optional<Account> a = accountRepository.findByAccountIdAndPassword(accountId, password);
-        boolean res = a.isPresent();
-        return res;
-    }
+        Optional<Account> optionalAccount = accountRepository.findByAccountIdAndPassword(accountId, password);
+        return optionalAccount.isPresent();
+    }    
 
     public List<Account> getAccounts() {
         return accountRepository.findAll();
@@ -53,7 +52,7 @@ public class LoginService {
     }
 
     @Transactional
-    public void updateAccount(Long accountId, String name, Integer phoneno, Double balance, String accountType) {
+    public void updateAccount(Long accountId, String name, String phoneno, Double balance, String accountType) {
         Account account = accountRepository.findById(accountId)
                 .orElseThrow(() -> new IllegalStateException("Account with Id : " + accountId + " doesn't exist"));
         if (name != null && name.length() > 0 && !Objects.equals(account.getName(), name)) {

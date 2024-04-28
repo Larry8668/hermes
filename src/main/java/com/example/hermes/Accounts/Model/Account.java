@@ -17,7 +17,7 @@ public class Account {
     private Long id;
     private Long accountId;
     private String name;
-    private Integer phoneno;
+    private String phoneno;
     private Double balance;
     private String accountType;
     private String password;
@@ -26,7 +26,7 @@ public class Account {
 
     }
 
-    public Account(Long id, Long accountId, String name, int phoneno, Double balance, String accountType, String password) {
+    public Account(Long id, Long accountId, String name, String phoneno, Double balance, String accountType, String password) {
         this.id = id;
         this.accountId = accountId;
         this.name = name;
@@ -36,7 +36,7 @@ public class Account {
         this.password = password;
     }
 
-    public Account(Long accountId, String name, int phoneno, Double balance, String accountType, String password) {
+    public Account(Long accountId, String name, String phoneno, Double balance, String accountType, String password) {
         this.accountId = accountId;
         this.name = name;
         this.phoneno = phoneno;
@@ -57,7 +57,7 @@ public class Account {
         return name;
     }
 
-    public Integer getPhoneno() {
+    public String getPhoneno() {
         return phoneno;
     }
 
@@ -85,7 +85,7 @@ public class Account {
         this.name = name;
     }
 
-    public void setPhoneno(Integer phoneno) {
+    public void setPhoneno(String phoneno) {
         this.phoneno = phoneno;
     }
 

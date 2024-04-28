@@ -40,7 +40,7 @@ public class SignUpController {
     public ModelAndView signUpUser(
             @RequestParam String name,
             @RequestParam String password,
-            @RequestParam Integer phoneNumber,
+            @RequestParam String phoneNumber,
             @RequestParam String accountType,
             RedirectAttributes redirectAttributes) {
         Boolean status = signUpService.addAccount(name, password, phoneNumber, accountType);

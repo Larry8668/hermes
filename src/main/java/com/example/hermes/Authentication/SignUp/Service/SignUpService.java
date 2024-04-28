@@ -27,7 +27,7 @@ public class SignUpService {
     }
 
     @Transactional
-    public boolean addAccount(String name, String password, int phoneNumber, String accountType) {
+    public boolean addAccount(String name, String password, String phoneNumber, String accountType) {
         List<Account> allAccounts = accountRepository.findAll();
         System.out.println("All Accounts: " + allAccounts);
 
@@ -50,7 +50,7 @@ public class SignUpService {
         if(randomValue < 0) randomValue *= -1;
 
         // Create a new Account object with the provided details
-        Account newAccount = new Account(newAccountId, randomValue, name, phoneNumber, 500.0, accountType, password);
+        Account newAccount = new Account(newAccountId, newAccountId, name, phoneNumber, 500.0, accountType, password);
         accountRepository.save(newAccount);
 
         System.out.println("Account created successfully.");

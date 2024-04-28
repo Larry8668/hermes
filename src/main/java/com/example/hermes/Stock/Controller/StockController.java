@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.hermes.Stock.Factory.StockFactory;
 import com.example.hermes.Stock.Factory.StockFactoryImpl;
@@ -28,8 +29,9 @@ public class StockController {
     }
 
     @PostMapping("/addStock")
-    public ModelAndView addStock(@RequestParam String name, @RequestParam String type, @RequestParam Double price) {
+    public String addStock(@RequestParam String name, @RequestParam String type, @RequestParam Double price, RedirectAttributes redirectAttributes) {
         stockFactoryImpl.createStock(name, type, price);
-        return new ModelAndView("factory.html");
+        redirectAttributes.addFlashAttribute("successMessage", "Stock added to Market");
+        return "redirect:/factory";
     }
 }

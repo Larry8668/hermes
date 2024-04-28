@@ -40,16 +40,20 @@ public class LoginController {
     }
 
     @PostMapping
-    public String checkValidUserLogin(@RequestParam Long accountId, @RequestParam String password, RedirectAttributes redirectAttributes) {
+    public String checkValidUserLogin(@RequestParam Long accountId, @RequestParam String password,
+            RedirectAttributes redirectAttributes) {
         boolean validUser = loginService.checkUserExists(accountId, password);
         redirectAttributes.addFlashAttribute("message", "Username or Password is Incorrect, Try again!");
 
-        if(validUser){
+        if (validUser) {
             Optional<Account> currUser = loginService.getAccountById(accountId);
             redirectAttributes.addFlashAttribute("currUser", currUser.get());
             System.out.println(currUser);
-            return "redirect:/home"; 
+            if (currUser.get().getAccountType().toLowerCase().equals("admin"))
+                return "redirect:/";
+            return "redirect:/home";
         }
+        redirectAttributes.addFlashAttribute("errorMessage", "Username or Password is Incorrect, Try again!");
         return "redirect:/login";
     }
 }
