@@ -1,12 +1,17 @@
 package com.example.hermes.Stock.Factory;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.hermes.Stock.Builder.StockBuilder;
 import com.example.hermes.Stock.Model.Stock;
 import com.example.hermes.Stock.Model.StockRepository;
 
 @Service
 public class StockFactoryImpl implements StockFactory {
+
+    @Autowired
+    public StockBuilder stockBuilder;
 
     private final StockRepository stockRepository;
 
@@ -41,30 +46,34 @@ public class StockFactoryImpl implements StockFactory {
         return stockRepository.save(stock);
     }
 
-    @Override
-    public Stock createCustomStock(String name, String type, Double price) {
-        Stock stock = new Stock();
-        stock.setName(name);
-        stock.setType(type);
-        stock.setPrice(price);
-        return stockRepository.save(stock);
+    private Stock buildStock(String name, String type, Double price) {
+        return stockBuilder
+                .setName(name)
+                .setType(type)
+                .setPrice(price)
+                .build();
     }
 
-    public Stock createStock(String name, String type, Double price){
+    @Override
+    public Stock createCustomStock(String name, String type, Double price) {
+        return buildStock(name, type, price);
+    }
+
+    public Stock createStock(String name, String type, Double price) {
         Stock stock;
-        switch(type.toLowerCase()){
-            case "tech": 
+        switch (type.toLowerCase()) {
+            case "tech":
                 stock = createTechStock(name);
                 break;
             case "fin":
                 stock = createFinStock(name);
                 break;
-            case "pharma": 
+            case "pharma":
                 stock = createPharmaStock(name);
                 break;
-            default: 
+            default:
                 stock = createCustomStock(name, type, price);
-                break;            
+                break;
         }
         return stock;
     }
