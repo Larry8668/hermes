@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.example.hermes.Accounts.Model.Account;
 import com.example.hermes.Accounts.Model.AccountRepository;
+import com.example.hermes.TransactionObserver.AccountObserver;
+import com.example.hermes.TransactionObserver.TransactionObservable;
 
 import jakarta.transaction.Transactional;
 
@@ -17,9 +19,13 @@ import jakarta.transaction.Transactional;
 public class SignUpService {
     @Autowired
     private final AccountRepository accountRepository;
+    
+    @Autowired
+    private final TransactionObservable transactionObservable;
 
-    public SignUpService(AccountRepository accountRepository) {
+    public SignUpService(AccountRepository accountRepository, TransactionObservable transactionObservable) {
         this.accountRepository = accountRepository;
+        this.transactionObservable = transactionObservable;
     }
     
     public Optional<Account> getLoggedInUser(String username) {
@@ -31,7 +37,6 @@ public class SignUpService {
         List<Account> allAccounts = accountRepository.findAll();
         System.out.println("All Accounts: " + allAccounts);
 
-        // Check if an account with the same name, phone number, and account type already exists
         for (Account account : allAccounts) {
             if (Objects.equals(account.getName(), name)
                     && Objects.equals(account.getPhoneno(), phoneNumber)
@@ -44,14 +49,16 @@ public class SignUpService {
 
         long newAccountId = allAccounts.size() + 1;
 
-        // Generate a random value for the second parameter
         Random random = new Random();
         long randomValue = random.nextInt();
         if(randomValue < 0) randomValue *= -1;
 
-        // Create a new Account object with the provided details
         Account newAccount = new Account(newAccountId, newAccountId, name, phoneNumber, 500.0, accountType, password);
         accountRepository.save(newAccount);
+
+        if (accountType.equals("admin")) {
+            transactionObservable.addObserver(new AccountObserver(newAccount));
+        }
 
         System.out.println("Account created successfully.");
         return true;

@@ -12,6 +12,7 @@ import com.example.hermes.Transactions.Model.Transaction;
 import com.example.hermes.Transactions.Model.TransactionRepository;
 import com.example.hermes.Accounts.Model.Account;
 import com.example.hermes.Accounts.Service.AccountService;
+import com.example.hermes.TransactionObserver.TransactionObservable;
 
 @Service
 public class TransactionService {
@@ -22,9 +23,13 @@ public class TransactionService {
     @Autowired
     private final AccountService accountService;
 
-    public TransactionService(TransactionRepository transactionRepository, AccountService accountService) {
+    @Autowired
+    private final TransactionObservable transactionObservable;
+
+    public TransactionService(TransactionRepository transactionRepository, AccountService accountService, TransactionObservable transactionObservable) {
         this.transactionRepository = transactionRepository;
         this.accountService = accountService;
+        this.transactionObservable = transactionObservable;
     }
 
     public List<Transaction> getAllTransactions() {
@@ -48,6 +53,8 @@ public class TransactionService {
         accountService.updateAccountForTransaction(fromAccount);
         accountService.updateAccountForTransaction(toAccount);
     
+        transactionObservable.notifyObservers();
+
         if (toAccount.getAccountType().equals("merchant")) {
             Double cashbackPercentage = 0.05;
             Double cashbackAmount = amount * cashbackPercentage;
