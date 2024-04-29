@@ -1,6 +1,6 @@
 package com.example.hermes.Transactions.Model;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,13 +19,13 @@ public class Transaction {
     private Long fromAccountId;
     private Long toAccountId;
     private Double amount;
-    private LocalDate time;
+    private Timestamp  time;
 
     public Transaction() {
         
     }
 
-    public Transaction(Long id, Long fromAccountId, Long toAccountId, Double amount, LocalDate time) {
+    public Transaction(Long id, Long fromAccountId, Long toAccountId, Double amount, Timestamp  time) {
         this.id = id;
         this.fromAccountId = fromAccountId;
         this.toAccountId = toAccountId;
@@ -33,7 +33,7 @@ public class Transaction {
         this.time = time;
     }
 
-    public Transaction(Long fromAccountId, Long toAccountId, Double amount, LocalDate time) {
+    public Transaction(Long fromAccountId, Long toAccountId, Double amount, Timestamp  time) {
         this.fromAccountId = fromAccountId;
         this.toAccountId = toAccountId;
         this.amount = amount;
@@ -62,7 +62,7 @@ public class Transaction {
         return amount;
     }
 
-    public LocalDate getTime() {
+    public Timestamp  getTime() {
         return time;
     }
 
@@ -82,7 +82,7 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public void setTime(LocalDate time) {
+    public void setTime(Timestamp  time) {
         this.time = time;
     }
 

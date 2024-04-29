@@ -2,6 +2,9 @@ package com.example.hermes.Transactions.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,8 +54,12 @@ public class TransactionService {
             fromAccount.setBalance(fromAccount.getBalance() + cashbackAmount);
             accountService.updateAccountForTransaction(fromAccount);
         }
+
+        LocalDateTime currentTime = LocalDateTime.now();
+        Timestamp timestamp = Timestamp.valueOf(currentTime);
     
-        Transaction transaction = new Transaction(fromAccountId, toAccountId, amount);
+        Transaction transaction = new Transaction(toAccountId, fromAccountId, amount);
+        transaction.setTime(timestamp);
         transactionRepository.save(transaction);
     }
 
