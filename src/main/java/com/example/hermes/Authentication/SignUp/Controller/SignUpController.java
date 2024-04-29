@@ -47,16 +47,16 @@ public class SignUpController {
         if (status && accountType.toLowerCase().equals("admin")) {
             System.out.println("Account Created Successfully!");
             redirectAttributes.addFlashAttribute("message", "Account created successfully!");
-            return new ModelAndView("redirect:/");
+            return new ModelAndView("index.html");
         } else if (status) {
             redirectAttributes.addFlashAttribute("message", "Account created successfully!");
             Optional<Account> loggedInUser = signUpService.getLoggedInUser(name);
             redirectAttributes.addFlashAttribute("currUser", loggedInUser.get());
             System.out.println(loggedInUser);
-            return new ModelAndView("redirect:/home");
+            return new ModelAndView("home.html");
         } else {
             redirectAttributes.addFlashAttribute("error", "Error creating account. Please try again.");
-            return new ModelAndView("redirect:/error");
+            return new ModelAndView("error.html");
         }
     }
 
