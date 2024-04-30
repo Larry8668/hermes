@@ -25,6 +25,7 @@
         </div>
         <p th:text="${transactionSuccess ? 'Payment Successful' : 'Payment Failed'}" class="${transactionSuccess ? 'text-green-500' : 'text-red-500'}"></p>
         <br />
+        <p th:if="${transactionSuccess and reward != null}" th:text="'Reward: ' + ${reward}" class="text-green-500"></p>
         <hr />
         <br />
         <br />

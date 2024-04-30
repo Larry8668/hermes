@@ -49,6 +49,11 @@ public class HomeController {
             if (toAccount.isPresent()) {
                 redirectAttributes.addFlashAttribute("toAccount", toAccount.get());
             }
+            if (toAccount.isPresent() && "merchant".equalsIgnoreCase(toAccount.get().getAccountType())) {
+                double cashbackPercentage = 0.05;
+                double cashbackAmount = amount * cashbackPercentage;
+                redirectAttributes.addFlashAttribute("reward", cashbackAmount);
+            }            
 
             transactionService.makeTransaction(fromAccountId, toAccountId, amount);
             return "redirect:/payment-status?transactionSuccess=true";
